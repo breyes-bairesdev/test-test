@@ -28,11 +28,11 @@ jobs:
 
       - name: Validate Tag
         run: |
-          if ! git fetch --tags && git tag --list  | grep  "v.*" | grep -q "^${{ github.event.inputs.tag }}$"; then
+          if ! git fetch --tags && git tag --list  | grep  "v.*" | grep "${{ github.event.inputs.tag }}"; then
             echo "Error: The tag '${{ github.event.inputs.tag }}' does not exist in the repository."
             exit 1
           fi
-          
+
       - name: Test
         run: | 
           echo "Test"
