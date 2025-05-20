@@ -1,0 +1,28 @@
+name: SMTPDOTCOM Webhook Config deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Select the version to deploy"
+        required: true
+        type: choice
+        options: ${{ github.event.repository.tags }}
+
+permissions: 
+  checks: write
+  contents: write
+  id-token: write
+  packages: write
+  pull-requests: write
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      HELM_VERSION: v3.10.1
+      HELM_CONFIG_PATH: "env/stitchedin/prod"
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
