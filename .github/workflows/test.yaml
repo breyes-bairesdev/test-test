@@ -32,3 +32,8 @@ jobs:
             echo "Error: The tag '${{ github.event.inputs.tag }}' does not exist in the repository."
             exit 1
           fi
+
+      - name: Test
+        run: | 
+          echo "Test"
+          echo "${{ github.event.inputs.tag }}"
